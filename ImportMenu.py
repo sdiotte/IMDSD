@@ -1,23 +1,43 @@
-import tkinter as Tk
+import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog
 
 def UploadAction(event=None):
     filename = filedialog.askopenfilename()
     print('Selected:', filename)
 
-root = Tk()
-frm = ttk.Frame(root, padding=100)
-frm.grid()
-ttk.Label(frm, text="Upload IMDSD FMT File").grid(column=0, row=0)
-ttk.Button(frm, text="FMT", command=UploadAction).grid(column=1, row=0)
-ttk.Label(frm, text="Upload IMDSD DAT File").grid(column=0, row=2)
-ttk.Button(frm, text="DAT", command=UploadAction).grid(column=1, row=2)
-ttk.Label(frm, text="Upload CT2020 FMT File").grid(column=0, row=3)
-ttk.Button(frm, text="FMT", command=UploadAction).grid(column=1, row=3)
-ttk.Label(frm, text="Upload CT2020 DAT File").grid(column=0, row=4)
-ttk.Button(frm, text="DAT", command=UploadAction).grid(column=1, row=4)
-ttk.Label(frm, text="Done Uploading").grid(column=0, row=5)
-ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=5)
-root.mainloop()
+window = tk.Tk()
+#root = Tk()
+
+#Menu Formatting
+from tkinter import ttk
+from tkinter import filedialog
+window.title("Chaintrack Replacement")
+for x in range(8):
+   for y in range(4):
+       frame = tk.Frame(
+           master=window,
+           relief=tk.RAISED,
+           borderwidth=1
+       )
+
+#Menu Buttons
+frame.grid(row=x, column=y)
+tk.Label(frame, text =f'\t\t\t\tChaintrack Replacement', font= "50").grid (column=1, row=0) 
+tk.Label(frame, text=f"\n\nUpload IMDSD FMT File\t\t\n\n", font= "1").grid(column=1, row=1)
+tk.Button(frame, text="FMT", command=UploadAction).grid(column=2, row=1)
+tk.Label(frame, text=f"\n\nUpload IMDSD DAT File\t\t\n\n").grid(column=1, row=2)
+tk.Button(frame, text="DAT", command=UploadAction).grid(column=2, row=2)
+tk.Label(frame, text=f"\n\nUpload CT2020 FMT File\t\t\n\n").grid(column=1, row=3)
+tk.Button(frame, text="FMT", command=UploadAction).grid(column=2, row=3)
+tk.Label(frame, text=f"\n\nUpload CT2020 DAT File\t\t\n\n").grid(column=1, row=4)
+tk.Button(frame, text="DAT", command=UploadAction).grid(column=2, row=4)
+tk.Label(frame, text=f"\n\nDone Uploading\t\t\n\n").grid(column=1, row=5)
+tk.Button(frame, text="Quit", command=window.destroy).grid(column=2, row=5)
+
+#Menu Checkbuttons
+tk.Checkbutton(frame, text = 'Parse IMDSD', onvalue = 1, offvalue = 0).grid(column=0, row=7)
+tk.Checkbutton(frame, text = 'Parse CT2020', onvalue = 1, offvalue = 0).grid(column=1, row=7)
+tk.Checkbutton(frame, text = f'Parse Both\t\t\t\t', onvalue = 1, offvalue = 0).grid(column=2, row=7)
+tk.Checkbutton(frame, text = 'Developer File', onvalue = 1, offvalue = 0).grid(column=3, row=7)
+
+window.mainloop()
