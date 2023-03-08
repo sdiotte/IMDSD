@@ -6,9 +6,6 @@ from tkinter import ttk
 window = tk.Tk()
 
 #Defining Functions
-def menu_bar(): 
-    pass
-
 def IMDSD_UploadAction(event=None):
     for x in range(2):
         filename = filedialog.askopenfilename(title='IMDSD Files')
@@ -35,22 +32,16 @@ def Systems_UploadAction(event=None):
     for x in range(2):
         filename = filedialog.askopenfilename(title='CT2020 Files')
         print('Selected:', filename)
-        Both_Reports = IMDSD()
+        Both_Reports = Both()
         Developer_File = Developer_PopUp()
 
 def IMDSD(event=None):
     pass
-#car = {
-  #"brand": "Ford",
- # "model": "Mustang",
- # "year": 1964
-#}
-
-#x = car.get("model")
-
-#print(x)
 
 def CT2020(event=None):
+    pass
+
+def Dev(event=None):
     pass
 
 def Both(event=None):
@@ -61,7 +52,7 @@ def Developer_PopUp(event=None):
     top.title('Developer File')
 #Create label for User Input
     var = StringVar()
-    label = Label(top, textvariable=var, font=("Times 12"))
+    label = Label(top, textvariable=var, font=("Times 12 bold"))
     
     var.set(f"Do you need a Developer File with this?")
     label.pack(pady=15)
@@ -76,12 +67,13 @@ def Developer_PopUp(event=None):
 
 #Menu Window Formatting
 window.title("Chaintrack Replacement")
+window.geometry("15x15")
 
 #Menubar Formmatting
 menubar=tk.Menu(window)
-menu_file=tk.Menu(menubar, tearoff=0)
+menu_file=tk.Menu(menubar, tearoff=0, font=("50"))
 
-menubar.add_cascade(label='File',menu=menu_file)
+menubar.add_cascade(label='File', menu=menu_file)
 
 #Submenu Formatting
 submenu_upload=tk.Menu(menu_file, tearoff=0)
