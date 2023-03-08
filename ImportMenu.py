@@ -14,14 +14,19 @@ def IMDSD_UploadAction(event=None):
         filename = filedialog.askopenfilename(title='IMDSD Files')
         print('Selected:', filename)
     IMDSD_Reports = IMDSD()
-    Developer_File = Developer()
+    Developer_File = Developer_PopUp()
     
 def CT2020_UploadAction(event=None):
     for x in range(2):
         filename = filedialog.askopenfilename(title='CT2020 Files')
         print('Selected:', filename)
         CT2020_Reports = CT2020()
-        Developer_File = Developer()
+        Developer_File = Developer_PopUp()
+
+def Dev_File_UploadAction(event=None):
+    for x in range(2):
+        filename = filedialog.askopenfilename(title='Developer File')
+        print('Selected:', filename)
 
 def Systems_UploadAction(event=None):
     for x in range(2):
@@ -31,7 +36,7 @@ def Systems_UploadAction(event=None):
         filename = filedialog.askopenfilename(title='CT2020 Files')
         print('Selected:', filename)
         Both_Reports = IMDSD()
-        Developer_File = Developer()
+        Developer_File = Developer_PopUp()
 
 def IMDSD(event=None):
     pass
@@ -51,20 +56,23 @@ def CT2020(event=None):
 def Both(event=None):
     pass
 
-def Developer(event=None):
+def Developer_PopUp(event=None):
     top = Toplevel(window)
     top.title('Developer File')
-    label.Label(top, text="Do you need a Developer File with this as well?", font=("Courier 22 bold"))
-    label.pack()
+#Create label for User Input
+    var = StringVar()
+    label = Label(top, textvariable=var, font=("Times 12"))
+    
+    var.set(f"Do you need a Developer File with this?")
+    label.pack(pady=15)
 #Create an Entry widget to accept User Input
     global entry
     entry= Entry(top, width= 40)
     entry.focus_set()
     entry.pack()
     string= entry.get()
-    label.configure(text=string)
 #Create a Button to validate Entry Widget
-    ttk.Button(top, text= "Done",width= 20, command=Developer).pack(pady=20)
+    ttk.Button(top, text= "Done",width= 20, command=Developer_PopUp).pack(pady=20)
 
 #Menu Window Formatting
 window.title("Chaintrack Replacement")
@@ -81,6 +89,7 @@ submenu_upload= Menu(menu_file, tearoff=0)
 submenu_upload.add_command(label="IMDSD DAT & FMT", command=IMDSD_UploadAction)
 submenu_upload.add_command(label="CT2020 DAT & FMT", command=CT2020_UploadAction)
 submenu_upload.add_command(label="Both", command=Systems_UploadAction)
+submenu_upload.add_command(label="Developer File", command=Dev_File_UploadAction)
 menu_file.add_cascade(label='Upload', menu=submenu_upload)
 
 menu_file.add_command(label='Exit', command=window.destroy)
