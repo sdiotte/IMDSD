@@ -8,12 +8,19 @@ import shutil
 
 window = tk.Tk()
 
+#Type Class
+#class type():
+    #def __init__(self):
+        #self.type = type
+   
+
 #Defining Functions
 
-def UploadAction(event=None):
+def UploadAction():
     for x in range(2):
         file = filedialog.askopenfilename(title=type)
         filename = os.path.basename(file)
+        filetitle, fileext = os.path.splitext(filename)      
         currentdirc = os.getcwd()
         filepath = os.path.join(currentdirc, filename)
         shutil.copy(file, filepath)
@@ -22,7 +29,6 @@ def UploadAction(event=None):
         reports = IMDSD()
     elif type == 'CT2020':
         reports = CT2020()
-    print(type)
 
 def Systems_UploadAction(event=None):
     for x in range(2):
