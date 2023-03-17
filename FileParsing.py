@@ -1,6 +1,7 @@
 #Import Modules
 import os
 
+
 #List of files in current directory
 currentdirc = os.getcwd()
 
@@ -14,7 +15,7 @@ def get_file_list(root_dir, F):
         for files in files:
             
             if any(ext in files for ext in F):
-                file_list.append(os.path.join(root, files))
+                file_list.append(files)
                 counter += 1
     return file_list
 
@@ -23,8 +24,9 @@ print(files)
 
 #Read Files
 #def readfiles(event=None):
-    #with open (files, 'r') as file:
-        #print(file.read())
+   # with open (files, 'r') as file:
+    #    counter += 1
+     #   print(file.read())
 
 #readfiles(files)
 

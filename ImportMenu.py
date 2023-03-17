@@ -8,26 +8,18 @@ import shutil
 
 window = tk.Tk()
 
-#Type Class
-#class type():
-    #def __init__(self):
-        #self.type = type
-   
-
 #Defining Functions
-
-def UploadAction():
+def UploadAction(file_type):
     for x in range(2):
-        file = filedialog.askopenfilename(title=type)
+        file = filedialog.askopenfilename(title=file_type)
         filename = os.path.basename(file)
         filetitle, fileext = os.path.splitext(filename)      
         currentdirc = os.getcwd()
         filepath = os.path.join(currentdirc, filename)
         shutil.copy(file, filepath)
-
-    if type == 'IMDSD':
+    if file_type == 'IMDSD':
         reports = IMDSD()
-    elif type == 'CT2020':
+    elif file_type == 'CT2020':
         reports = CT2020()
 
 def Systems_UploadAction(event=None):
@@ -40,19 +32,10 @@ def Systems_UploadAction(event=None):
         Both_Reports = IMDSD()
 
 def IMDSD(event=None):
-    pass
-#car = {
-  #"brand": "Ford",
- # "model": "Mustang",
- # "year": 1964
-#}
-
-#x = car.get("model")
-
-#print(x)
+    print('IMDSD')
 
 def CT2020(event=None):
-    pass
+    print('CT2020')
 
 def Both(event=None):
     pass
@@ -71,8 +54,8 @@ menubar.add_cascade(label='File', menu=menu_file)
 submenu_upload=tk.Menu(menu_file, tearoff=0)
 submenu_upload= Menu(menu_file, tearoff=0)
 #upload()
-submenu_upload.add_command(label="IMDSD DAT & FMT", command=UploadAction)
-submenu_upload.add_command(label="CT2020 DAT & FMT", command=UploadAction)
+submenu_upload.add_command(label="IMDSD DAT & FMT", command=lambda: UploadAction('IMDSD'))
+submenu_upload.add_command(label="CT2020 DAT & FMT", command=lambda: UploadAction('CT2020'))
 submenu_upload.add_command(label="Both", command=Systems_UploadAction)
 menu_file.add_cascade(label='Upload', menu=submenu_upload)
 
