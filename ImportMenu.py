@@ -21,6 +21,7 @@ def UploadAction(file_type):
         reports = IMDSD()
     elif file_type == 'CT2020':
         reports = CT2020()
+    window.destroy()
 
 def Systems_UploadAction(event=None):
     for x in range(2):

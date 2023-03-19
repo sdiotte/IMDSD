@@ -21,24 +21,22 @@ def get_file_list(root_dir, F):
 files = get_file_list(currentdirc, Extensions)
 print(files)
 
+#Read/Write Files
 def readfiles(event=None):
     
     for filename in files:
-        with open (filename, 'r+') as file:
-            print(file.read())
+        with open(filename, 'r') as infile:
+            file = infile.read()
+            file = file.split('#', 1)[0] #START here to remove everything after '#' line by line
+        with open(filename, 'w') as outfile:
+            outfile.write(file)
+            print(file)
 
 readfiles()
 
-
-
-
-
-
-#with open ():
-   # contents = dat.read()
-    #print(contents)
-
-#Import FMT File
-#with open('*.FMT') as fmt:
-   # contents = fmt.read()
-    #print(contents)
+#Clean Files
+def cleanfiles(event=None):
+    #for filename in files:
+        #filename.replace('#','')
+        #print(filename)
+        pass
