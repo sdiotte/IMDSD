@@ -1,6 +1,5 @@
 #Import Modules
-import os
-
+import os,glob
 
 #List of files in current directory
 currentdirc = os.getcwd()
@@ -22,13 +21,15 @@ def get_file_list(root_dir, F):
 files = get_file_list(currentdirc, Extensions)
 print(files)
 
-#Read Files
-#def readfiles(event=None):
-   # with open (files, 'r') as file:
-    #    counter += 1
-     #   print(file.read())
+def readfiles(event=None):
+    
+    for filename in files:
+        with open (filename, 'r+') as file:
+            print(file.read())
 
-#readfiles(files)
+readfiles()
+
+
 
 
 
@@ -41,9 +42,3 @@ print(files)
 #with open('*.FMT') as fmt:
    # contents = fmt.read()
     #print(contents)
-
-#add code: if file is fmt, remove #'s and anything after...perhaps have it import the old fields and place under new fields on header. Maybe with acronym for system in the front with dot or dash
-
-    
-#DAT to FMT Array
-#dat_to_fmt = []*

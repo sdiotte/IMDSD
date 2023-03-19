@@ -25,6 +25,9 @@ Before you begin, save the all FMT and DAT files to a directory other than the p
 
 Markdown:
 Please refer to the IMDSD.md file for more information.
+https://code.visualstudio.com/docs/languages/markdown
+https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+
 
 
 Data:
