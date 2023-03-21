@@ -24,22 +24,22 @@ files = get_file_list(currentdirc, Extensions)
 print(files)
 
 # Read/Clean Files
-
-
 def readfiles(event=None):
     count = 0
     for file in files:
         with open(file, 'r') as infile:
-            lines = infile.read().split("#")
             lines = infile.read().splitlines()
             for line in lines:
+                pound_loc = line.find("#")
+                if pound_loc > -1:
+                    line = line[:pound_loc]
                 if line.startswith("#"):
                     continue
-                elif line.startswith(" "):
+                elif (len(line.strip()) == 0):
                     continue
                 else:
                     count += 1
                     print(line)
-            print(lines)
+                
 
 readfiles()
