@@ -1,0 +1,24 @@
+RECORD_TYPE BATCH_LINE
+BATCH.BATCH_NUMBER              9   
+LITERAL				"      " 
+LITERAL				"HDR"   
+LITERAL				"    "  
+STORE.DIVISION_NUMBER           3   
+LITERAL				"00"   
+STORE.STORE_NUMBER              4   
+LITERAL		                "                " 
+LITERAL				"    "	
+CRLF				2
+
+BATCH.BATCH_NUMBER              9   
+BATCH.HOST_SEQ			9
+LITERAL				"0"   
+BATCH_LINE.TABLE                2   
+
+BATCH_OP			1
+LITERAL				"0"    
+BATCH_LINE.ERR_CODE		5
+LITERAL				"00"   
+STORE.STORE_NUMBER              4   
+PRIMARY_KEY			21  
+CRLF 				2

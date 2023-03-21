@@ -29,13 +29,17 @@ print(files)
 def readfiles(event=None):
     count = 0
     for file in files:
-        with open(file, 'r+') as infile:
-            Lines = infile.read().splitlines()
-            for line in Lines:
-                 if line.startswith("#"):
-                      continue
-                 else:
-                      count += 1
-                      print(line)
+        with open(file, 'r') as infile:
+            lines = infile.read().split("#")
+            lines = infile.read().splitlines()
+            for line in lines:
+                if line.startswith("#"):
+                    continue
+                elif line.startswith(" "):
+                    continue
+                else:
+                    count += 1
+                    print(line)
+            print(lines)
 
 readfiles()
