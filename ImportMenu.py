@@ -43,11 +43,12 @@ def Both(event=None):
 
 #Menu Window Formatting
 window.title("Chaintrack Replacement")
-window.geometry("15x15")
+window.geometry("300x25")
+window.eval('tk::PlaceWindow . center')
 
 #Menubar Formmatting
 menubar=tk.Menu(window)
-menu_file=tk.Menu(menubar, tearoff=0, font=("50"))
+menu_file=tk.Menu(menubar, tearoff=0)
 
 menubar.add_cascade(label='File', menu=menu_file)
 
