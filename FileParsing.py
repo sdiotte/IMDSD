@@ -26,7 +26,7 @@ print(files)
 def readfiles(event=None):
     count = 0
     for file in files:
-        with open(file) as infile:
+        with open(file, 'r+') as infile:
             lines = infile.read().splitlines()
             for line in lines:
                 pound_loc = line.find("#")
@@ -39,4 +39,6 @@ def readfiles(event=None):
                 else:
                     count += 1
                     print(line)
+                    infile.write(line)
+            infile.truncate()
 readfiles()
