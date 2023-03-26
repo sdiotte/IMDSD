@@ -1,6 +1,5 @@
 # Import Modules
 import os
-from contextlib import redirect_stdout
 
 # List of files in current directory
 currentdirc = os.getcwd()
@@ -28,6 +27,7 @@ def readfiles(event=None):
     for file in files:
         with open(file, 'r+') as infile:
             lines = infile.read().splitlines()
+            infile.seek(0)
             for line in lines:
                 pound_loc = line.find("#")
                 if pound_loc > -1:
@@ -41,4 +41,5 @@ def readfiles(event=None):
                     print(line)
                     infile.write(line)
             infile.truncate()
+
 readfiles()
