@@ -43,7 +43,3 @@ def readfiles(event=None):
             infile.truncate()
 
 readfiles()
-
-#FMT to Array
-def fmt_array():
-    print([f for f in files if f.endswith('.fmt', '.FMT')])
