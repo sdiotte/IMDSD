@@ -10,7 +10,6 @@ import pandas as pd
 window = tk.Tk()
 
 #Defining Functions
-#The upload action utilized by the Tkinter Menu
 def UploadAction(file_type):
     for x in range(2):
         file = filedialog.askopenfilename(title=file_type)
@@ -19,7 +18,29 @@ def UploadAction(file_type):
         currentdirc = os.getcwd()
         filepath = os.path.join(currentdirc, filename)
         shutil.copy(file, filepath)
+    if file_type == 'IMDSD':
+        reports = IMDSD()
+    elif file_type == 'CT2020':
+        reports = CT2020()
     window.destroy()
+
+def Systems_UploadAction(event=None):
+    for x in range(2):
+        filename = filedialog.askopenfilename(title='IMDSD Files')
+        print('Selected:', filename)
+    for x in range(2):
+        filename = filedialog.askopenfilename(title='CT2020 Files')
+        print('Selected:', filename)
+        Both_Reports = IMDSD()
+
+def IMDSD(event=None):
+    print('IMDSD')
+
+def CT2020(event=None):
+    print('CT2020')
+
+def Both(event=None):
+    pass
 
 #Menu Window Formatting
 window.title("Chaintrack Replacement")
@@ -37,6 +58,8 @@ submenu_upload=tk.Menu(menu_file, tearoff=0)
 submenu_upload= Menu(menu_file, tearoff=0)
 #upload()
 submenu_upload.add_command(label="IMDSD DAT & FMT", command=lambda: UploadAction('IMDSD'))
+submenu_upload.add_command(label="CT2020 DAT & FMT", command=lambda: UploadAction('CT2020'))
+submenu_upload.add_command(label="Both", command=Systems_UploadAction)
 menu_file.add_cascade(label='Upload', menu=submenu_upload)
 
 menu_file.add_command(label='Exit', command=window.destroy)
@@ -45,14 +68,16 @@ window.config(menu=menubar)
 
 window.mainloop()
 
-#Create a dictionary and clean the FMT file
+# Initialize an empty dictionary to store the results
 result_dict = {}
+# Open the FMT file with the given name for reading
 f = open("BATERR.FMT", "r")
-# Initialize a counter to track Key occurrences
+# Initialize a counter to track LITERAL occurrences
 batch_count = 0
 store_count = 0
 literal_count = 0
 crlf_count = 0
+# Loop through each line in the file
 for line in f:
   # Check if the first character of the line is a letter (indicating a field)
   if line[0].isalpha():
@@ -70,21 +95,26 @@ for line in f:
     key = line.split()[0]
     # Extract the value (field format) by removing the key from the line and stripping whitespaces
     value = line.replace(key, "").strip()
-    # If the key repeats, append the current " "_count to the key and increment the count
+    # If the key is "BATCH.BATCH_NUMBER", append the current literal_count to the key and increment the count
     if key == "BATCH.BATCH_NUMBER":
         key = f"{key}{batch_count}"
         batch_count += 1
+    # If the key is "STORE.STORE_NUMBER", append the current literal_count to the key and increment the count
     if key == "STORE.STORE_NUMBER":
         key = f"{key}{store_count}"
         store_count += 1  
+    # If the key is "LITERAL", append the current literal_count to the key and increment the count
     if key == "LITERAL":
         key = f"{key}{literal_count}"
         literal_count += 1
+    # If the key is "CRLF", append the current literal_count to the key and increment the count
     if key == "CRLF":
         key = f"{key}{crlf_count}"
         crlf_count += 1
     # Add the key-value pair to the result dictionary
     result_dict[key] = value
+
+    
 result_dict
 
 #further processing for length of fields and transforming str nums to ints
@@ -112,7 +142,6 @@ hdr_keys = [
 ]
 hdr_dict  = result_dict
 hdr_dict = {key: result_dict[key] for key in hdr_keys}
-#Update BATCH_NUMBER to match CT2020
 hdr_dict["BATCH.BATCH_NUMBER0"] = 6 
 hdr_dict
 
@@ -131,7 +160,6 @@ table_keys = [
 ]
 table_dict  = result_dict
 table_dict = {key: result_dict[key] for key in table_keys}
-#Update BATCH_NUMBER & HOST_SEQ to match CT2020
 table_dict["BATCH.BATCH_NUMBER1"] = 6 
 table_dict["BATCH.HOST_SEQ"] = 6
 table_dict

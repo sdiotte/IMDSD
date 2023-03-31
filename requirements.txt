@@ -1,2 +1,8 @@
 Packages:
-    pip install tkinter
+    Need to Install: 
+        tkinter
+            pip install tkinter
+    Included in Standard Library:
+        pandas
+        shutil
+        os.path
